@@ -63,13 +63,14 @@ def update_info():
 def index():
 	return flask.render_template('index.html', files=files, minecraft_info=minecraft_info)
 
-files = []
-minecraft_info = []
-thread = threading.Thread(target=update_info)
-thread.daemon = True
-thread.start()
+if __name__ == '__main__':
+	files = []
+	minecraft_info = []
+	thread = threading.Thread(target=update_info)
+	thread.daemon = True
+	thread.start()
 
-port = int(os.environ.get('PORT', 5000))
-if os.environ.get('PRODUCTION') != "true": app.debug = True
+	port = int(os.environ.get('PORT', 5000))
+	if os.environ.get('PRODUCTION') != "true": app.debug = True
 
-app.run(host='0.0.0.0')
+	app.run(host='0.0.0.0')
