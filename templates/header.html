@@ -1,9 +1,24 @@
+{% set navigation_bar = [
+    ('/', 'index', 'Home')
+] %}
+{% set active_page = active_page|default('index') %}
 <!doctype html>
 <html>
 <head>
-	<title>QuakerCon - GS Computer Club</title>
+	{% for href, id, caption in navigation_bar %}
+		{% if id == active_page %}
+			{% if id == 'index' %}
+				<title>QuakerCon</title>
+			{% else %}
+				<title>{{ caption }} - QuakerCon</title>
+			{% endif %}
+		{% endif %}
+	{% endfor %}
 	<link href="/static/bootstrap.min.css" rel="stylesheet">
 	<link href="/static/custom.css" rel="stylesheet">
+
+	<script src="/static/jquery-2.0.0.min.js"></script>
+	<script src="/static/custom.js"></script>
 </head>
 <body>
 	<div class="navbar navbar-fixed-top">
@@ -17,9 +32,9 @@
 				<a class="brand" href="/">QuakerCon</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="active"><a href="/">Home</a></li>
-						<li><a href="/downloads/">Downloads</a></li>
-						<li><a href="/roster/">Roster</a></li>
+						{% for href, id, caption in navigation_bar %}
+						<li{% if id == active_page %} class="active"{% endif %}><a href="{{ href }}">{{ caption }}</a></li>
+						{% endfor %}
 					</ul>
 				</div>
 			</div>

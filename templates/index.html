@@ -1,3 +1,121 @@
+{% set active_page = "index" %}
 {% include 'header.html' %}
-	<p>index</p>
+	<div class="hero-unit text-center">
+		<div class="row">
+			<h1>Welcome to QuakerCon!</h1>
+		</div>
+		<div class="row">
+			<button class="btn btn-large btn-primary show-trailer-button">Show Trailer</button>
+		</div>
+		<div class="row trailer">
+			<iframe width="800" height="500" src="http://www.youtube.com/embed/wXkpBLKiR30?rel=0" frameborder="0" allowfullscreen></iframe>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span6">
+			<h3>Schedule</h3>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Time</th>
+						<th>Event</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>12:00</td>
+						<td>Doors open, competition signups begin</td>
+					</tr>
+					<tr>
+						<td>1:00 - 3:00</td>
+						<td>League of Legends quarterfinals</td>
+					</tr>
+					<tr>
+						<td>2:00 - 3:00</td>
+						<td>Halo competition</td>
+					</tr>
+					<tr>
+						<td>3:00 - 4:00</td>
+						<td>Team Fortress 2 competition</td>
+					</tr>
+					<tr>
+						<td>4:00 - 5:00</td>
+						<td>Super Smash Bros. Brawl competition</td>
+					</tr>
+					<tr>
+						<td>4:00 - 5:00</td>
+						<td>Call of Duty 4 competition</td>
+					</tr>
+					<tr>
+						<td>5:00 - 7:00</td>
+						<td>League of Legends semifinals and finals</td>
+					</tr>
+					<tr>
+						<td>5:30</td>
+						<td>Mystery event</td>
+					</tr>
+					<tr>
+						<td>9:00</td>
+						<td>Server shut down</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="span5 offset1">
+			<div>
+				<h3>Servers</h3>
+				<ul>
+					{% if minecraft_info %}
+					<li>Minecraft
+						<ul>
+							{% for server in minecraft_info %}
+								{% if server[2] %}
+									<li>{{ server[0] }} ({{ server[2].current_players }} online)
+										<ul>
+											<li>Server IP: <code>{{ server[1] }}</code></li>
+										</ul>
+									</li>
+								{% else %}
+									<li>{{ server[0] }}
+										<ul>
+											<li>Server IP: <code>{{ server[1] }}</code></li>
+										</ul>
+									</li>
+								{% endif %}
+							{% endfor %}
+						</ul>
+					</li>
+					{% endif %}
+					<li>Team Fortress 2 (<a href="steam://connect/tf2">connect</a>)
+						<ul>
+							<li>Server IP: <code>tf2</code></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<h3>Downloads</h3>
+				{% if files %}
+				<ul>
+					{% for file in files %}
+					<li><a href="/download/{{ file }}">{{ file }}</a></li>
+					{% endfor %}
+				</ul>
+				{% else %}
+				<p>No downloads available.</p>
+				{% endif %}
+			</div>
+			<div>
+				<h3>Wi-Fi</h3>
+				<ul>
+					<li>SSID: quakercon</li>
+					<li>Password: quakercon</li>
+				</ul>
+			</div>
+			<div>
+				<h3>IRC</h3>
+				<p>Join us in #gscc on irc.freenode.net. (<a href="http://webchat.freenode.net/?channels=gscc" target="_blank">Go to webchat</a>)</p>
+			</div>
+		</div>
+	</div>
 {% include 'footer.html' %}
